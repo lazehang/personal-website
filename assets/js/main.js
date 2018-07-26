@@ -8,6 +8,7 @@ if (window.location.hostname === "lazehang.com") {
     window.location.hostname = "www.lazehang.com";
 }
 
+
 (function($) {
 
     var $window = $(window),
