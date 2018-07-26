@@ -49,8 +49,8 @@ jobs:
     working_directory: /tmp/workspace
     steps:
       - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: /tmp/workspace
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
       - run:
           name: Install awscli
           command: sudo pip install awscli
@@ -58,14 +58,14 @@ jobs:
           name: Deploy to S3
           command: aws s3 sync --acl public-read s3://lazehang --delete
     
-  workflows:
-    version: 2
-    build-deploy:
-      jobs:
-        - build
-        - deploy:
-            requires:
-              - build
-            filters:
-              branches:
-                only: master
+    workflows:
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: master
