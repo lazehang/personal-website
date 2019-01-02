@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>gallery - Mangal Hang Limbu | Lazehang | Web Developer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Mangal Hang Limbu, Laze Hang, lazehang, web developer, Reactjs, Personal website " />
+    <meta name="description" content="Personal website of Mangal Hang Limbu also known as Lazehang.">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+    
+    
+    <link rel="stylesheet" href="assets/css/main.css" />
+    
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+  <!-- Header -->
+  <section id="header">
+        <div class="inner">
+            <a href="index.html"><span class="icon major fa-code"></span></a>
+            <div class="header">
+
+                <h2 class="fadeInUp animated text h2header animate fadeInDown strong"> Laze Hang </h2>
+
+            </div>
+            <h1>Hi, I'm <strong class="strong">Mangal Hang Limbu</strong>,<br /> a full stack web developer.</h1>
+            <ul class="actions special">
+                <li><a href="#one" class="button scrolly">Discover</a></li>
+            </ul>
+        </div>
+    </section>
+
+
+    <section id="one" class="style1 main special">
+        <img :src="profile.profile_picture">
+        <div class="username">
+            <i class="fab fa-instagram"></i>
+            <a :href="`https://instagram.com/${profile.username}`" target="_blank">@{{profile.username}}</a>
+        </div>
+        <div class="gallery row" >
+            <a class="col-6-xsmall col-4 feed" v-for="feed in feeds" :href="feed.img" data-fancybox :data-caption="feed.caption">
+                <img :src="feed.img" class="feed-img" alt="" @load="load" />
+            </a>
+        </div>
+            
+             
+        
+        </section>
+     
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        (function($) {
+            var vm = new Vue({
+                el: "#one",
+                data () {
+                    return {
+                        feeds: [],
+                        loading: true,
+                        imgload: 0,
+                        profile:[]
+                    }
+                },
+                methods: {
+                    load() {
+                        this.imgload++
+
+                        if (this.imgload >= this.feeds.length) {
+                            $('.gallery').show()
+                        }
+                    }
+                },
+                created() {
+                    $('.gallery').hide()
+
+                    const self = this
+                    $.get('https://api.instagram.com/v1/users/self/media/recent?access_token=420477502.1677ed0.9d23ca98221646f68a5242946427eea4', (res) => {
+                        if (res.data) {
+                            self.profile = res.data[0].user
+                            res.data.forEach((feed) => {
+                                self.feeds.push({
+                                    caption: feed.caption.text,
+                                    img: feed.images.standard_resolution.url
+                                })
+                            })
+                        }
+                    })
+                },
+                mounted() {
+                    
+                    
+                }
+            })
+
+        })(jQuery);
+
+    </script>
+</body>
+
+</html>

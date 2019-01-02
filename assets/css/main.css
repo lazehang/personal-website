@@ -3278,3 +3278,22 @@ body.is-preload #header:after {
 .aws {
     color: #ff9900;
 }
+.feed {
+    display: flex;
+    align-items: center;
+}
+.feed-img {
+    max-width: 100%;
+}
+
+/* .grid-sizer, .grid-item {
+    width: 20%;
+} */
+.grid {
+    /* max-width: 100vw; */
+}
+
+.username {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
