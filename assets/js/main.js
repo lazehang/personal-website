@@ -34,6 +34,10 @@ if (window.location.hostname === "lazehang.com") {
     // Scrolly.
     $('.scrolly').scrolly();
 
+    $.get('https://github.com/users/lazehang/contributions', (data) => {
+        console.log(data)
+    })
+
 })(jQuery);
 
 /* ---- particles.js config ---- */
