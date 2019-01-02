@@ -10,6 +10,7 @@ if (window.location.hostname === "lazehang.com") {
 
 
 (function($) {
+    new GitHubCalendar("#gh-contribution", "lazehang", { responsive: true });
 
     var $window = $(window),
         $body = $('body');
