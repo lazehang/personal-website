@@ -92,7 +92,7 @@
                             self.profile = res.data[0].user
                             res.data.forEach((feed) => {
                                 self.feeds.push({
-                                    caption: feed.caption.text,
+                                    caption: !!feed.caption ? feed.caption.text : null,
                                     img: feed.images.standard_resolution.url
                                 })
                             })
